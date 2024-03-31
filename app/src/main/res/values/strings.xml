@@ -1,0 +1,294 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="about">About</string>
+    <string name="action_about">About Us</string>
+    <string name="app_name">Margh</string>
+    <string name="cancel">Cancel</string>
+    <string name="company">Company</string>
+    <string name="contact">Contact</string>
+    <string name="copy">Copy</string>
+    <string name="email">Email</string>
+    <string name="email_name">technovimalin@gmail.com</string>
+
+    <string name="favorites">Favorites</string>
+    <string name="fes">FES</string>
+    <string name="font_size">Font Size</string>
+    <string name="general_setting">General</string>
+    <string name="help_feedback">Feedback</string>
+    <string name="home">Home</string>
+    <string name="invite_friends">Share App</string>
+    <string name="list_add_favorites">Added to favorites!</string>
+    <string name="list_more_option">More Option</string>
+    <string name="list_play_speech">Audio Play</string>
+    <string name="list_remove_favorites">Removed from favorites!</string>
+    <string name="msg_search_input">Please Insert Keyword</string>
+    <string name="no_data_available">No Data Found</string>
+    <string name="no_favorite_found">Favorite item not found!</string>
+    <string name="no_internet_connection">No Internet Connection!</string>
+    <string name="no_search_found">No search found!</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="rate_app">Rate App</string>
+    <string name="rate_five_star">Rate 5 Star</string>
+    <string name="rate_tips">Tap 5 star to rate it on the \nPlay Store.</string>
+    <string name="retry">Retry!</string>
+    <string name="roboto_condensed">sans-serif-condensed</string>
+    <string name="roboto_light">sans-serif-light</string>
+    <string name="roboto_medium">sans-serif-medium</string>
+    <string name="roboto_regular">sans-serif</string>
+    <string name="roboto_bold">sans-serif-black</string>
+    <string name="search_menu_title">Search</string>
+    <string name="select_5_star_rating">Please select a 5-star rating!</string>
+    <string name="send_mail">Send mail…</string>
+    <string name="setting_about">About</string>
+    <string name="setting_feedback">Feedback</string>
+    <string name="settings">Settings</string>
+    <string name="settingVersion">App version %1$s</string>
+    <string name="share">Share</string>
+    <string name="share_app">Share App</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="str_search_hint">Search…</string>
+    <string name="strShareContent">I would like to share Amazing App with you. You can download this application from play-store easily.</string>
+    <string name="strShareTitle">The Best Fast English Speaking Apps!</string>
+    <string name="subject_email">Fast English Speaking Feedback</string>
+    <string name="submits">Submit</string>
+    <string name="text_speech">Text Speech</string>
+    <string name="tips">Tips</string>
+    <string name="title_about">ABOUT</string>
+    <string name="title_dark">Dark Mode</string>
+    <string name="title_notification">Notification</string>
+    <string name="title_settings">SETTINGS</string>
+    <string name="version">Version</string>
+    <string name="website">Website</string>
+    <string name="website_link">https//www.technovimal.in</string>
+    <string name="week_1">WEEK 1</string>
+
+
+    <string name="ad" translatable="false">AD</string>
+    <string name="app_description" translatable="false">Current Affairs, Quiz, Mock Tests, Govt Job Alert, Study Material, Notes, 15 Year Ques Papers, and many more.</string>
+
+    <string name="subject_email_help_us" translatable="false">Help us translate!</string>
+    <string name="quiz_text_a" translatable="false">A</string>
+    <string name="quiz_text_b" translatable="false">B</string>
+    <string name="quiz_text_c" translatable="false">C</string>
+    <string name="quiz_text_d" translatable="false">D</string>
+    <string name="read_question" tools:ignore="MissingTranslation">Question</string>
+    <string name="read_answer" tools:ignore="MissingTranslation">Answer:</string>
+    <string name="read_explanation" tools:ignore="MissingTranslation">Explanation:</string>
+
+
+    <string name="all_syllabus">All Syllabus</string>
+    <string name="any">Any</string>
+    <string name="are_you_preparing">What are you preparing for?</string>
+    <string name="are_you_preparing_lang">What language will you use to prepare?</string>
+    <string name="back">Back</string>
+    <string name="challenge">Challenge</string>
+    <string name="close">Close</string>
+    <string name="congratulations">Congratulations!!</string>
+    <string name="correct">Correct</string>
+    <string name="course">Course</string>
+    <string name="current_affairs">Latest Update</string>
+    <string name="dialog_error_invalid_range">Please enter a number between 1 and 100 *</string>
+
+    <string name="dialog_twenty_five">25</string>
+    <string name="easy">Easy</string>
+    <string name="else_want_to_know">What else do you want to know?</string>
+    <string name="favorite_added">Added to Favorite</string>
+    <string name="favorite_removed">Removed from Favorite</string>
+    <string name="feedback">Feedback</string>
+    <string name="follow_home_banner_des">Get free inspirations of apps.</string>
+    <string name="follow_home_banner_title">Follow us on Instagram</string>
+    <string name="follow_join_community">Join our community</string>
+
+    <string name="get_started">Get Started</string>
+    <string name="guide_all_subjects3">All 3 Subjects</string>
+    <string name="guide_all_subjects4">All 4 Subjects</string>
+    <string name="guide_all_subjects5">All 5 Subjects</string>
+    <string name="guide_all_subjects6">All 6 Subjects</string>
+    <string name="guide_all_subjects8">All 8 Subjects</string>
+    <string name="guide_bank_exams">Bank Exams</string>
+    <string name="guide_iit_jee">IIT JEE</string>
+    <string name="guide_nda_na">NDA &amp; NA</string>
+    <string name="guide_neet_exam">NEET Exam</string>
+    <string name="guide_police_exams">Police Exams</string>
+    <string name="guide_railway_exams">Railway Exams</string>
+    <string name="guide_ssc_exam">SSC Exam</string>
+    <string name="hard">Hard</string>
+    <string name="landpage_lang_bengali">বাংলা</string>
+    <string name="landpage_lang_english">English</string>
+    <string name="landpage_lang_hindi">हिंदी</string>
+    <string name="landpage_proficiency_advanced">Advanced</string>
+    <string name="landpage_proficiency_advanced_des">I know police exams app very well</string>
+    <string name="landpage_proficiency_beginner">Beginner</string>
+    <string name="landpage_proficiency_beginner_des">"I'm new to police exams app"</string>
+    <string name="landpage_proficiency_intermediate">Intermediate</string>
+    <string name="landpage_proficiency_intermediate_des">"I've tried police exams app before"</string>
+    <string name="landpage_proficiency_title">Proficiency in police exams app?</string>
+    <string name="language">Language</string>
+    <string name="language_name">English</string>
+    <string name="lbl_no_internet_connection">No Internet Connection</string>
+    <string name="lbl_no_result">No result</string>
+    <string name="lbl_latest">Latest</string>
+    <string name="lbl_popular">Popular</string>
+    <string name="learn_more">LEARN MORE ></string>
+    <string name="loading">Loading…</string>
+    <string name="medium">Medium</string>
+    <string name="mock_test">Mock Test</string>
+    <string name="model_current_affairs">Latest</string>
+    <string name="multiple_choice">Multiple Choice</string>
+    <string name="nav_delete">Delete</string>
+    <string name="new_cover">New</string>
+    <string name="next">Next</string>
+
+    <string name="notification">Notification</string>
+    <string name="number_of_questions">Number of Questions</string>
+    <string name="percent">Percent</string>
+    <string name="question">questions</string>
+    <string name="question_english">English Question</string>
+    <string name="question_hindi">Hindi Question</string>
+    <string name="quiz_category">Quiz Category</string>
+    <string name="quiz_dialog_cancel">Cancel</string>
+    <string name="quiz_dialog_delete_subtitle">Are you sure you want to delete all scores?</string>
+    <string name="quiz_dialog_delete_title">Delete All Scores</string>
+    <string name="quiz_dialog_exit_title">Are you sure you want to exit?</string>
+    <string name="quiz_dialog_ok">OK</string>
+    <string name="quiz_game">Quiz Game</string>
+    <string name="quiz_live_test">Live Test</string>
+    <string name="quiz_result">Quiz Result</string>
+    <string name="quiz_result_challenge">You have completed challenge in</string>
+
+    <string name="quiz_thirty">30</string>
+    <string name="quiz_true_false">True / False</string>
+    <string name="quiz_use_hint">Use Hint</string>
+    <string name="quiz_wrong">Wrong</string>
+    <string name="quiz_start">Quiz Start</string>
+
+    <string name="read_more">Read More</string>
+    <string name="result_fail">Better luck next time!</string>
+    <string name="result_win">Congrats!</string>
+
+    <string name="score">Score</string>
+    <string name="search">Search</string>
+    <string name="select">Select</string>
+    <string name="select_star_rating">Please select a 5-star rating!</string>
+    <string name="select_difficulty">Select Difficulty</string>
+    <string name="select_type">Select Type</string>
+    <string name="select_upsc_cse">UPSC CSE</string>
+
+    <string name="setting_dark_night">Dark Mode</string>
+
+    <string name="setting_general">General</string>
+    <string name="setting_language_title">Language</string>
+    <string name="setting_notification">Notifications</string>
+    <string name="setting_privacy_policy">Privacy policy</string>
+    <string name="setting_rate_us">Rate us</string>
+    <string name="setting_reminder">Reminder</string>
+    <string name="setting_reminder_des">Reminders for reading start and end</string>
+    <string name="setting_scores">Quiz Score</string>
+    <string name="setting_share_app">Share app</string>
+    <string name="setting_translate">Help us translate</string>
+    <string name="setting_version_suffix">"Version: "</string>
+
+    <string name="skill">Skill</string>
+    <string name="skip_question">Skip Question</string>
+    <string name="start_now">Start Now</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="str_share">Share</string>
+    <string name="str_share_content">Prepare for your police exams with this free app with over 6000+ questions and answers, interactive quizzes, and study materials.👮‍♂️📚</string>
+    <string name="str_share_title">Police Exams Book &amp; Quiz App!🚨</string>
+    <string name="str_share_url">Police Exams Book and Quiz App! 🚨\n\nPrepare for your police exams with this free app with over 6000+ questions and answers, interactive quizzes, and study materials.👮‍♂️📚\n\nDownload it now and start studying today!📚\n\nClick here to download: </string>
+
+    <string name="tap_again_to_exit">Tap again to exit.</string>
+    <string name="time_00_23">Time: 00:25</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_help_feedback">Help &amp; Feedback</string>
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Topics</string>
+    <string name="title_score">Quiz Score</string>
+    <string name="title_submit">Submit</string>
+    <string name="title_topics">Topics</string>
+    <string name="total_question">Total Question</string>
+
+    <string name="quiz_tv1">General Instructions:</string>
+
+    <string name="quiz_tv3">General Instructions:</string>
+    <string name="quiz_tv4">General Instructions:</string>
+    <string name="quiz_tv5">General Instructions:</string>
+
+
+    <!---Home -->
+    <string name="find_your_1000">Find your 1000+ Jobs</string>
+    <string name="search_job" tools:ignore="TypographyEllipsis">Search a job or position...</string>
+    <string name="see_all">See all</string>
+
+    <string name="latest_job">Latest Jobs</string>
+    <string name="category">Category</string>
+    <string name="setting">Setting</string>
+    <string name="recent_job">Recent Jobs</string>
+
+    <string name="recommended_job">Recommended Jobs</string>
+    <string name="back_key">Please click BACK again to exit</string>
+
+    <!---Login-->
+    <string name="lbl_welcome_back">Welcome Back!</string>
+    <string name="lbl_skip">Skip</string>
+    <string name="msg_let_s_log_in_a">Let\'s Log in. Apply to Jobs!</string>
+    <string name="lbl_email">Email<font color='#FF716A'>*</font></string>
+    <string name="lbl_password">Password</string>
+    <string name="lbl_forgot_password">Forgot Password?</string>
+    <string name="lbl_remember_me">Remember me</string>
+    <string name="lbl_log_in">Log In</string>
+    <string name="msg_or_continue_with">or continue with</string>
+    <string name="lbl_facebook">Facebook</string>
+    <string name="lbl_google">Google</string>
+    <string name="msg_by_signing_in">By Signing in you accept %s</string>
+    <string name="msg_by_signing_up">By Signing up you accept %s</string>
+    <string name="lbl_privacy_policy">Privacy Policy</string>
+    <string name="msg_don_t_have_an_account">Don\'t have an account? %s</string>
+    <string name="default_user_name">ViaviWebtech</string>
+    <string name="social_media">Join Social Media</string>
+    <string name="appearance_light">Light</string>
+    <string name="appearance_dark">Dark</string>
+    <string name="appearance_system">System</string>
+    <string name="appearance">Appearance</string>
+    <string name="total_time">Time:</string>
+    <string name="total_questions">Questions:</string>
+    <string name="today_lessons">Today Lessons</string>
+    <string name="are_ready_for_mock_test">Are ready for Test?</string>
+    <string name="studying_time">Studying Time</string>
+    <string name="_60_min">59 Min</string>
+    <string name="_7000">7630+</string>
+    <string name="students">Students</string>
+    <string name="start">Start</string>
+    <string name="daily_practice">Daily</string>
+    <string name="_1000_questions">1000+ Questions</string>
+    <string name="easy_practices">Easy</string>
+    <string name="medium_practices">Medium</string>
+    <string name="advanced_practice">Advanced</string>
+    <string name="onboarding">Onboarding</string>
+    <string name="quiz_your_answer">Your Ans:</string>
+    <string name="quiz_correct_answer">Correct Ans:</string>
+    <string name="quiz_check_answer_key">Answer Key:</string>
+    <string name="setting_text_speech">Text Speech</string>
+    <string name="quiz_answer">Answer</string>
+    <string name="speaking">Speaking</string>
+    <string name="english">English</string>
+
+    <string name="share_text">Download Fast Bengali to Learn English App on Google Play Store</string>
+    <string name="setting_support_us">Support us</string>
+    <string name="setting_coach_voice">Coach Voice</string>
+    <string name="setting_setect_tts_engine">Select TTS engine</string>
+    <string name="setting_download_tts_engine">Download TTS engine</string>
+    <string name="setting_device_tts_settings">Device TTS setting</string>
+    <string name="setting_share_invite">Invite friends to get 100+ Points</string>
+    <string name="tv_invite">Invite</string>
+    <string name="tv_invite_desc">Invite friends to App and get 101 when your friend sends their first point. They get 21 points!</string>
+    <string name="invite_copy_code">Copy your code eo2Yn</string>
+    <string name="title_profile">Profile</string>
+    <string name="download">Download</string>
+    <string name="logout">Logout</string>
+    <string name="name_demo">Demo Name</string>
+    <string name="about_us">About us</string>
+    <string name="contact_us">Contact us</string>
+    <string name="select_a_category">Select a Category</string>
+
+</resources>
