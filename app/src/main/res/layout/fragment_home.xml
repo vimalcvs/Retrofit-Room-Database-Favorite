@@ -79,8 +79,10 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/included"
-            layout="@layout/layout_error" />
+            android:id="@+id/ic_error"
+            layout="@layout/layout_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/sl_swipe"

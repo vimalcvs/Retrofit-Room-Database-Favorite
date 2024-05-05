@@ -22,14 +22,41 @@ class ActivityDetail : AppCompatActivity() {
         val binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.ivBack.setOnClickListener { finish() }
 
+        @Suppress("DEPRECATION")
         val modelList = intent.getSerializableExtra(EXTRA_KEY) as ModelWallpaper?
         if (modelList != null) {
+            Glide.with(this)
+                .load(modelList.largeImageURL)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        binding.pbLoading.visibility = View.GONE
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable,
+                        model: Any,
+                        target: Target<Drawable>,
+                        dataSource: DataSource,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        binding.pbLoading.visibility = View.GONE
+                        return false
+                    }
+                }).into(binding.ivImage)
 
         } else {
             Toast.makeText(this, "No data available", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 }

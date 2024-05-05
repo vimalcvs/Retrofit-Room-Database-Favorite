@@ -29,7 +29,7 @@ class AdapterWallpaper(
     private val modelLists: MutableList<ModelWallpaper?>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val VIEW_ITEM = 1
-    private val repository: Repository = Repository.getInstance(context)!!
+    private val repository: Repository by lazy { Repository.getInstance(context)!! }
     var scrolling: Boolean = false
     private var loading = false
     private var onLoadMoreListener: OnLoadMoreListener? = null
@@ -95,7 +95,7 @@ class AdapterWallpaper(
             })
 
             Glide.with(context)
-                .load(modelList!!.largeImageURL)
+                .load(modelList!!.webformatURL)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
@@ -120,36 +120,31 @@ class AdapterWallpaper(
                     }
                 }).into(holder.binding.ivImage)
 
-            holder.binding.ivShare.setOnClickListener { v: View? ->
+            holder.binding.ivShare.setOnClickListener {
                 shareImage(
                     context, modelList.largeImageURL
                 )
             }
 
-
-            val isFavorite = repository.isFavorite(modelList.id)
-            if (isFavorite) {
+            if (repository.isFavorite(modelList.id)) {
                 holder.binding.ivFavorite.setImageResource(R.drawable.ic_btm_nav_favorite_active)
             } else {
                 holder.binding.ivFavorite.setImageResource(R.drawable.ic_btm_nav_favorite_normal)
             }
 
-            holder.binding.cvCard.setOnClickListener { v: View? ->
+            holder.binding.cvCard.setOnClickListener {
                 if (mOnItemClickListener != null) {
                     mOnItemClickListener!!.onItemClick(modelList)
                 }
             }
 
-            holder.binding.ivSave.setOnClickListener { view: View? ->
-                val isFavorites = repository.isFavorite(
-                    modelList.id
-                )
-                if (isFavorites) {
-                    repository.deleteFavoriteProduct(modelList)
+            holder.binding.ivSave.setOnClickListener {
+                if (repository.isFavorite(modelList.id)) {
+                    repository.deleteFavorite(modelList)
                     holder.binding.ivFavorite.setImageResource(R.drawable.ic_btm_nav_favorite_normal)
                     Toast.makeText(context, "Remove to Favorite", Toast.LENGTH_SHORT).show()
                 } else {
-                    repository.insertProductToFavorite(modelList)
+                    repository.insertFavorite(modelList)
                     holder.binding.ivFavorite.setImageResource(R.drawable.ic_btm_nav_favorite_active)
                     Toast.makeText(context, "Added to Favorite", Toast.LENGTH_SHORT).show()
                 }
@@ -214,8 +209,8 @@ class AdapterWallpaper(
                     val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                     val lastPos: Int = layoutManager.findLastVisibleItemPosition()
                     if (!loading && lastPos == itemCount - 1 && onLoadMoreListener != null) {
-                        val current_page = itemCount / (Constant.LOAD_MORE)
-                        onLoadMoreListener!!.onLoadMore(current_page)
+                        val page = itemCount / (Constant.LOAD_MORE)
+                        onLoadMoreListener!!.onLoadMore(page)
                         loading = true
                     }
                 }
@@ -223,22 +218,22 @@ class AdapterWallpaper(
         }
     }
 
+    fun clearData() {
+        modelLists.clear()
+        notifyDataSetChanged()
+    }
+
     interface OnLoadMoreListener {
-        fun onLoadMore(current_page: Int)
+        fun onLoadMore(page: Int)
     }
 
     interface OnItemClickListener {
         fun onItemClick(modelWallpaper: ModelWallpaper?)
-
         fun onItemDelete(modelWallpaper: ModelWallpaper?)
     }
 
+    class OriginalViewHolder(val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root)
 
-    class OriginalViewHolder(val binding: ItemListBinding) : RecyclerView.ViewHolder(
-        binding.root
-    )
-
-    class ProgressViewHolder(val binding: ItemLoadMoreBinding) : RecyclerView.ViewHolder(
-        binding.root
-    )
+    class ProgressViewHolder(val binding: ItemLoadMoreBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,15 +32,17 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.Calendar
 
+
 class FragmentHome : Fragment(), AdapterWallpaper.OnItemClickListener {
+
     private val modelLists: MutableList<ModelWallpaper?> = ArrayList()
-    var adapter: AdapterCategory? = null
-    var category: String = "education"
+    private val repository: Repository by lazy { Repository.getInstance(requireActivity())!! }
+    private var adapterCategory: AdapterCategory? = null
+    private var adapterWallpaper: AdapterWallpaper? = null
+    private var categoryString = "random"
     private var binding: FragmentHomeBinding? = null
-    private var adapterList: AdapterWallpaper? = null
     private var callbackCall: Call<CallbackWallpaper?>? = null
     private var postTotal = 0
-    private var repository: Repository? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,33 +71,28 @@ class FragmentHome : Fragment(), AdapterWallpaper.OnItemClickListener {
             }
         }
         binding!!.tvWelcome.text = greetingMessage
+        binding!!.icError.pvProgress.visibility = View.VISIBLE
 
-
-        binding!!.included.pvProgress.visibility = View.VISIBLE
-
-        repository = Repository.getInstance(requireActivity())
-
-        binding!!.cvCategory.setOnClickListener { v: View? -> showDialogCategory() }
-
+        binding!!.cvCategory.setOnClickListener { showDialogCategory() }
         requestAction(1)
 
         binding!!.rvRecycler.layoutManager = LinearLayoutManager(requireActivity())
-        adapterList = AdapterWallpaper(requireActivity(), binding!!.rvRecycler, modelLists)
-        binding!!.rvRecycler.adapter = adapterList
+        adapterWallpaper = AdapterWallpaper(requireActivity(), binding!!.rvRecycler, modelLists)
+        binding!!.rvRecycler.adapter = adapterWallpaper
 
-        adapterList!!.setOnLoadMoreListener(object : AdapterWallpaper.OnLoadMoreListener {
-            override fun onLoadMore(current_page: Int) {
-                if (postTotal > adapterList!!.itemCount && current_page != 0) {
-                    val nextPage = current_page + 1
+        adapterWallpaper!!.setOnLoadMoreListener(object : AdapterWallpaper.OnLoadMoreListener {
+            override fun onLoadMore(page: Int) {
+                if (postTotal > adapterWallpaper!!.itemCount && page != 0) {
+                    val nextPage = page + 1
                     requestAction(nextPage)
                 } else {
-                    adapterList!!.setLoaded()
+                    adapterWallpaper!!.setLoaded()
                 }
             }
         })
 
 
-        adapterList!!.setOnItemClickListener(this)
+        adapterWallpaper!!.setOnItemClickListener(this)
         binding!!.slSwipe.setColorSchemeResources(
             R.color.color_orange,
             R.color.color_red,
@@ -106,11 +104,11 @@ class FragmentHome : Fragment(), AdapterWallpaper.OnItemClickListener {
             requestAction(1)
         }
 
-        binding!!.included.btError.setOnClickListener { v: View? ->
+        binding!!.icError.btError.setOnClickListener {
             requestAction(1)
-            binding!!.included.llError.visibility = View.GONE
+            binding!!.icError.llErrorNetwork.visibility = View.GONE
             binding!!.rvRecycler.visibility = View.GONE
-            binding!!.included.pvProgress.visibility = View.VISIBLE
+            binding!!.icError.pvProgress.visibility = View.VISIBLE
         }
 
 
@@ -118,9 +116,9 @@ class FragmentHome : Fragment(), AdapterWallpaper.OnItemClickListener {
     }
 
     private fun showDialogCategory() {
-        val binding = DialogCategoryBinding.inflate(LayoutInflater.from(requireActivity()))
+        val bindingDialog = DialogCategoryBinding.inflate(LayoutInflater.from(requireActivity()))
         val builder = MaterialAlertDialogBuilder(requireActivity(), R.style.CustomDialog)
-        builder.setView(binding.root)
+        builder.setView(bindingDialog.root)
         builder.setCancelable(true)
         val dialog = builder.create()
         val window = dialog.window
@@ -137,32 +135,37 @@ class FragmentHome : Fragment(), AdapterWallpaper.OnItemClickListener {
         numbers.add(ModelCategory(8, R.drawable.icon_people, "people", "People"))
         numbers.add(ModelCategory(9, R.drawable.icon_religion, "religion", "Religion"))
 
-        adapter = AdapterCategory(requireActivity(), numbers)
-        binding.rvRecyclerCategory.layoutManager = GridLayoutManager(requireActivity(), 3)
-        binding.rvRecyclerCategory.adapter = adapter
+        adapterCategory = AdapterCategory(requireActivity(), numbers)
+        bindingDialog.rvRecyclerCategory.layoutManager = GridLayoutManager(requireActivity(), 3)
+        bindingDialog.rvRecyclerCategory.adapter = adapterCategory
 
-        adapter!!.setOnItemClickListener(object : AdapterCategory.OnItemClickListener {
+        adapterCategory!!.setOnItemClickListener(object : AdapterCategory.OnItemClickListener {
             override fun onItemClick(category: ModelCategory?) {
-                dialog.dismiss()
-                this@FragmentHome.category = category!!.category
+                binding!!.icError.pvProgress.visibility = View.VISIBLE
+                this@FragmentHome.categoryString = category!!.category
+                adapterWallpaper!!.clearData()
                 requestAction(1)
+                dialog.dismiss()
             }
         })
 
         dialog.show()
     }
 
-    private fun requestListPostApi(pageNo: Int) {
-        val apiInterface = createAPI(requireActivity())
-        callbackCall = apiInterface.getWallpapers(category, "vertical", Constant.LOAD_MORE, pageNo)
+    private fun requestListPostApi(pageNo: Int, category: String) {
+        callbackCall = createAPI(requireActivity()).getWallpapers(
+            category,
+            "vertical",
+            Constant.LOAD_MORE,
+            pageNo
+        )
         callbackCall!!.enqueue(object : Callback<CallbackWallpaper?> {
             override fun onResponse(
                 call: Call<CallbackWallpaper?>,
                 response: Response<CallbackWallpaper?>
             ) {
-                binding!!.included.pvProgress.visibility = View.GONE
-
-                binding!!.included.llError.visibility = View.GONE
+                binding!!.icError.pvProgress.visibility = View.GONE
+                binding!!.icError.llErrorNetwork.visibility = View.GONE
                 binding!!.rvRecycler.visibility = View.VISIBLE
                 binding!!.slSwipe.isRefreshing = false
                 val resp = response.body()
@@ -170,21 +173,17 @@ class FragmentHome : Fragment(), AdapterWallpaper.OnItemClickListener {
                     postTotal = resp.total
                     displayApiResult(resp.hits)
                 } else {
-                    binding!!.included.pvProgress.visibility = View.GONE
+                    binding!!.icError.pvProgress.visibility = View.GONE
                     binding!!.slSwipe.isRefreshing = false
-                    binding!!.included.llError.visibility = View.VISIBLE
-                    binding!!.included.tvError.setText(R.string.no_data_available)
-                    binding!!.included.ivError.setImageResource(R.drawable.icon_data_empty)
+                    binding!!.icError.llErrorNetwork.visibility = View.VISIBLE
                 }
             }
 
             override fun onFailure(call: Call<CallbackWallpaper?>, t: Throwable) {
                 if (!call.isCanceled) {
                     binding!!.slSwipe.isRefreshing = false
-                    binding!!.included.pvProgress.visibility = View.GONE
-                    binding!!.included.llError.visibility = View.VISIBLE
-                    binding!!.included.ivError.setImageResource(R.drawable.icon_data_net)
-                    binding!!.included.tvError.setText(R.string.no_internet_connection)
+                    binding!!.icError.pvProgress.visibility = View.GONE
+                    binding!!.icError.llErrorNetwork.visibility = View.VISIBLE
                 }
             }
         })
@@ -192,20 +191,22 @@ class FragmentHome : Fragment(), AdapterWallpaper.OnItemClickListener {
 
 
     private fun displayApiResult(modelLists: List<ModelWallpaper?>) {
-        adapterList!!.insertData(modelLists)
+        adapterWallpaper!!.insertData(modelLists)
         binding!!.slSwipe.isRefreshing = false
         if (modelLists.isEmpty()) {
-            binding!!.included.llError.visibility = View.VISIBLE
-            binding!!.included.tvError.setText(R.string.no_data_available)
+            binding!!.icError.llErrorNetwork.visibility = View.VISIBLE
         }
     }
 
 
-    private fun requestAction(page_no: Int) {
-        if (page_no != 1) {
-            adapterList!!.setLoading()
+    private fun requestAction(page: Int) {
+        if (page != 1) {
+            adapterWallpaper!!.setLoading()
         }
-        Handler().postDelayed({ requestListPostApi(page_no) }, Constant.DELAY_TIME)
+        Handler(Looper.getMainLooper()).postDelayed(
+            { requestListPostApi(page, categoryString) },
+            Constant.DELAY_TIME
+        )
     }
 
     override fun onDestroy() {
@@ -224,7 +225,7 @@ class FragmentHome : Fragment(), AdapterWallpaper.OnItemClickListener {
     }
 
     override fun onItemDelete(modelWallpaper: ModelWallpaper?) {
-        repository!!.insertProductToFavorite(modelWallpaper)
+        repository.insertFavorite(modelWallpaper)
         Toast.makeText(requireActivity(), "Added to Favorite", Toast.LENGTH_SHORT).show()
     }
 }

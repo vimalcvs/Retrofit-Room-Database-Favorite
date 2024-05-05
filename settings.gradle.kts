@@ -19,7 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-//Retrofit Room Database Favorite
-rootProject.name = "Teacher List"
+rootProject.name = "Retrofit Room Multiplatform Favorite List"
 include(":app")
  

@@ -2,7 +2,6 @@ package com.vimal.margh.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,7 +17,6 @@ class AdapterCategory(private val context: Context, private val categories: List
         this.mOnItemClickListener = mItemClickListener
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemCategoryBinding.inflate(
@@ -33,13 +31,12 @@ class AdapterCategory(private val context: Context, private val categories: List
         val category = categories[position]
         holder.binding.tvTitle.text = category.title
 
-
         Glide.with(context)
             .load(category.image)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.binding.ivImage)
 
-        holder.binding.clItem.setOnClickListener { v: View? ->
+        holder.binding.clItem.setOnClickListener {
             if (mOnItemClickListener != null) {
                 mOnItemClickListener!!.onItemClick(category)
             }

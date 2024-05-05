@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     id("org.jetbrains.kotlin.android")
-    //id("com.google.devtools.ksp")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -14,13 +14,12 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-             isMinifyEnabled = true
+            isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -51,10 +50,8 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.retrofit)
-    implementation(libs.swiperefreshlayout)
-
-    annotationProcessor(libs.room.compiler)
     implementation(libs.room.runtime)
-   // ksp(libs.room.compiler)
+    implementation(libs.swiperefreshlayout)
+    ksp(libs.room.compiler)
 
 }

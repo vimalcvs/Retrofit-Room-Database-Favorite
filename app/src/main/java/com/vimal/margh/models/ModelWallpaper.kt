@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 
-@Entity(tableName = "model_list")
+@Entity(tableName = "table_wallpaper")
 class ModelWallpaper(
     @field:PrimaryKey
     var id: Int,

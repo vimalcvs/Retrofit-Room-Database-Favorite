@@ -30,9 +30,9 @@ class FragmentProfile : Fragment() {
             ).show()
         }
 
-        binding!!.mcProfileShare.setOnClickListener { v: View? -> shareApp(requireActivity()) }
+        binding!!.mcProfileShare.setOnClickListener { shareApp(requireActivity()) }
 
-        binding!!.mcProfileContact.setOnClickListener { v: View? -> contactApp(requireActivity()) }
+        binding!!.mcProfileContact.setOnClickListener { contactApp(requireActivity()) }
 
         return root
     }

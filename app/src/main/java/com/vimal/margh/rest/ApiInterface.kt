@@ -19,6 +19,6 @@ interface ApiInterface {
 
     companion object {
         const val CACHE: String = "Cache-Control: max-age=640000"
-        const val AGENT: String = "User-Agent: Police-Exam-App"
+        const val AGENT: String = "User-Agent: Wallpaper-App"
     }
 }

@@ -1,27 +1,31 @@
-package com.vimal.margh.db;
+package com.vimal.margh.db
 
-import androidx.lifecycle.LiveData;
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
-import com.vimal.margh.models.ModelWallpaper;
+import com.vimal.margh.models.ModelWallpaper
 
 
 @Dao
 interface FavoriteDao {
 
-    @Query("Select * from model_list")
-    fun getAllProducts(): LiveData<List<ModelWallpaper>>
+    @Query("Select * from table_wallpaper")
+    fun getAllFavorite(): LiveData<List<ModelWallpaper>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertProductToFavorite(modelWallpaper: ModelWallpaper)
+    fun insertFavorite(modelWallpaper: ModelWallpaper)
 
     @Delete
-    fun deleteProductFromFavorite(modelWallpaper: ModelWallpaper)
+    fun deleteFavorite(modelWallpaper: ModelWallpaper)
 
-    @Query("SELECT EXISTS (SELECT 1 FROM model_list WHERE id = :id)")
+    @Query("DELETE FROM table_wallpaper")
+    fun deleteAllFavorite()
+
+    @Query("SELECT EXISTS (SELECT 1 FROM table_wallpaper WHERE id = :id)")
     fun isFavorite(id: Int): Boolean
+
 }

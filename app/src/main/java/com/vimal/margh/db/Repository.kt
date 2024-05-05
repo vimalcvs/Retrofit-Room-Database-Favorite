@@ -3,41 +3,63 @@ package com.vimal.margh.db
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.vimal.margh.models.ModelWallpaper
-import java.util.concurrent.Callable
-import java.util.concurrent.ExecutionException
-import java.util.concurrent.Executors
+import com.vimal.margh.util.Utils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class Repository(context: Context?) {
-    private val productDao: FavoriteDao
-    val products: LiveData<List<ModelWallpaper>>
+
+    private val favoriteDao: FavoriteDao
+    private val favoriteLiveData: LiveData<List<ModelWallpaper>>
 
     init {
-        val database = FavoriteDatabase.getDatabase(context!!)
-        productDao = database.setFavoriteDao()
-        products = productDao.getAllProducts()
+        val database = RoomDB.getDatabase(context!!)
+
+        favoriteDao = database.getFavoriteDao()
+        favoriteLiveData = favoriteDao.getAllFavorite()
     }
 
-    fun deleteFavoriteProduct(product: ModelWallpaper?) {
-        object : Thread(Runnable { productDao.deleteProductFromFavorite(product!!) }) {
-        }.start()
+
+    fun allFavorite(): LiveData<List<ModelWallpaper>> {
+        return favoriteLiveData
     }
 
-    fun insertProductToFavorite(product: ModelWallpaper?) {
-        object : Thread(Runnable { productDao.insertProductToFavorite(product!!) }) {
-        }.start()
+    fun deleteFavorite(model: ModelWallpaper?) {
+        try {
+            object : Thread(Runnable { favoriteDao.deleteFavorite(model!!) }) {
+            }.start()
+        } catch (e: Exception) {
+            Utils.getErrors(e)
+        }
+    }
+
+
+    fun insertFavorite(model: ModelWallpaper?) {
+        try {
+            object : Thread(Runnable { favoriteDao.insertFavorite(model!!) }) {
+            }.start()
+        } catch (e: Exception) {
+            Utils.getErrors(e)
+        }
+    }
+
+
+    fun deleteAllFavorite() {
+        try {
+            object : Thread(Runnable { favoriteDao.deleteAllFavorite() }) {
+            }.start()
+        } catch (e: Exception) {
+            Utils.getErrors(e)
+        }
     }
 
     fun isFavorite(id: Int): Boolean {
-        val callable = Callable { productDao.isFavorite(id) }
-        val future = Executors.newSingleThreadExecutor().submit(callable)
-        try {
-            return future.get()
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        } catch (e: ExecutionException) {
-            e.printStackTrace()
+        return runBlocking {
+            withContext(Dispatchers.IO) {
+                favoriteDao.isFavorite(id)
+            }
         }
-        return false
     }
 
     companion object {

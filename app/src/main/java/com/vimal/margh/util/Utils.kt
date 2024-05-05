@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.vimal.margh.util
 
 import android.app.DownloadManager
@@ -7,6 +9,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -17,7 +20,13 @@ import com.bumptech.glide.request.target.Target
 import java.io.ByteArrayOutputStream
 
 object Utils {
-    @JvmStatic
+
+
+    fun getErrors(e: Exception?) {
+        println("TAG :: " + Log.getStackTraceString(e))
+    }
+
+
     fun shareImage(context: Context, imageUrl: String?) {
         Glide.with(context)
             .asBitmap()
@@ -61,8 +70,6 @@ object Utils {
             .submit()
     }
 
-
-    @JvmStatic
     fun downloadImage(context: Context, url: String?) {
         val request = DownloadManager.Request(Uri.parse(url))
         request.setTitle("Image Download")
@@ -75,7 +82,6 @@ object Utils {
     }
 
 
-    @JvmStatic
     fun shareApp(context: Context) {
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/plain")
@@ -87,7 +93,6 @@ object Utils {
         context.startActivity(Intent.createChooser(shareIntent, "Share using"))
     }
 
-    @JvmStatic
     fun contactApp(context: Context) {
         val message = "Hello, this is a direct message from my app!"
         val uri = Uri.parse("smsto:" + "+918882683887")
